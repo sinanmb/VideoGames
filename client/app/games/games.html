@@ -9,9 +9,23 @@
     </thead>
     <tbody>
     <tr ng-repeat="game in games">
-      <td>{{game.name}}</td>
-      <td>{{game.platform}}</td>
-      <td>{{game.genre}}</td>
+      <td ng-hide="game.edit">{{game.name}}</td>
+      <td ng-show="game.edit"><input type="text" ng-model="game.name"></td>
+
+      <td ng-hide="game.edit">{{game.platform}}</td>
+      <td ng-show="game.edit"><input type="text" ng-model="game.platform"></td>
+
+      <td ng-hide="game.edit">{{game.genre}}</td>
+      <td ng-show="game.edit"><input type="text" ng-model="game.genre"></td>
+
+      <td ng-hide="game.edit">
+        <button class="btn btn-success" ng-click="toggleEdit($index)">Edit</button>
+        <button class="btn btn-danger" ng-click="deleteGame($index)">Delete</button>
+      </td>
+      <td ng-show="game.edit">
+        <button class="btn btn-primary" ng-click="saveGame($index)">Save</button>
+        <button class="btn btn-danger" ng-click="toggleEdit($index)">Cancel</button>
+      </td>
     </tr>
     </tbody>
     <tr>
