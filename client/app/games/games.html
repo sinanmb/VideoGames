@@ -1,4 +1,26 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="col-md-12">
-This is the games view.
+  <h1>Games</h1>
+  <table class="table table-striped">
+    <thead>
+    <th>Name</th>
+    <th>Platform</th>
+    <th>Genre</th>
+    </thead>
+    <tbody>
+    <tr ng-repeat="game in games">
+      <td>{{game.name}}</td>
+      <td>{{game.platform}}</td>
+      <td>{{game.genre}}</td>
+    </tr>
+    </tbody>
+    <tr>
+      <td><input type="text" ng-model="newGame.name"></td>
+      <td><input type="text" ng-model="newGame.platform"></td>
+      <td><input type="text" ng-model="newGame.genre"></td>
+      <td>
+        <button class="btn btn-primary" ng-click="addNewGame()">Add New</button>
+      </td>
+    </tr>
+  </table>
 </div>
