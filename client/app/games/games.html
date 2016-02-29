@@ -1,6 +1,8 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="col-md-12">
   <h1>Games</h1>
+  <button class="btn btn-primary" ng-click="resetGames()">Clear Filter</button>
+  Current Filter: {{filter}}
   <table class="table table-striped">
     <thead>
     <th>Name</th>
@@ -12,10 +14,14 @@
       <td ng-hide="game.edit">{{game.name}}</td>
       <td ng-show="game.edit"><input type="text" ng-model="game.name"></td>
 
-      <td ng-hide="game.edit">{{game.platform}}</td>
+      <td ng-hide="game.edit">
+        <a href="" ng-click="filterByPlatform(game.platform)">{{game.platform}}</a>
+      </td>
       <td ng-show="game.edit"><input type="text" ng-model="game.platform"></td>
 
-      <td ng-hide="game.edit">{{game.genre}}</td>
+      <td ng-hide="game.edit">
+        <a href="" ng-click="filterByGenre(game.genre)">{{game.genre}}</a>
+      </td>
       <td ng-show="game.edit"><input type="text" ng-model="game.genre"></td>
 
       <td ng-hide="game.edit">

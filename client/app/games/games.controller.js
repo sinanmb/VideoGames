@@ -3,6 +3,8 @@
 angular.module('videoGamesApp')
   .controller('GamesCtrl', function ($scope, $http) {
 
+    $scope.filter = 'none';
+
     $http.get('/api/games')
       .success (function (data) {
       $scope.games = data;
@@ -14,7 +16,9 @@ angular.module('videoGamesApp')
 
     $scope.addNewGame = function() {
       $http.post('/api/games', $scope.newGame)
-        .success(function () {
+        .success(function (data) {
+
+          $scope.newGame._id = data._id;
           $scope.games.push($scope.newGame);
           $scope.newGame = {};
         })
@@ -45,5 +49,27 @@ angular.module('videoGamesApp')
         .error (function (error) {
         alert('Error! Something went wrong');
       });
-    }
+    };
+
+    $scope.resetGames = function(){
+      $scope.games = $scope.originalGames;
+      $scope.filter = 'none';
+    };
+
+    $scope.filterByGenre = function(genre){
+      $scope.resetGames();
+      $scope.games = $scope.games.filter(function(game){
+        return game.genre === genre;
+      });
+      $scope.filter = 'Genre: ' + genre;
+    };
+
+    $scope.filterByPlatform = function(platform){
+      $scope.resetGames();
+      $scope.games = $scope.games.filter(function(game){
+        return game.platform === platform;
+      });
+      $scope.filter = 'Platform: ' + platform;
+    };
+
   });
